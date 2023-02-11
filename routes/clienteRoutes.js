@@ -49,8 +49,4 @@ api.post('/create_review_producto_cliente', auth, create_review_producto_cliente
 api.get('/get_review_producto_cliente/:id', get_review_producto_cliente);
 api.get('/get_review_cliente/:id',auth, get_review_cliente);
 
-api.get('/', (req,res)=>{
-  res.status(200).send({ message: 'Funcionando' });
-})
-
 module.exports = api;
