@@ -51,11 +51,12 @@ const registro_compra_cliente = async (req, res) => {
 
           let producto = await Producto.findById({ _id: element.producto });
           let newStock = producto.stock - element.cantidad;
-
+          let newVenta = producto.nventas + 1;
           await Producto.findByIdAndUpdate(
             { _id: element.producto },
             {
               stock: newStock,
+              nventas: newVenta,
             }
           );
 
