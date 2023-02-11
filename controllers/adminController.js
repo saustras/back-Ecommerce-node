@@ -35,16 +35,14 @@ const registro_admin = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: 'No pudo ser registrado' });
   }
 };
 const getAdminUser = async (req, res) => {
   if (req.user) {
     const id = req.params['id'];
-    console.log(id);
     try {
       const reg = await admin.findById({ _id: id });
-      console.log(reg);
       res.status(200).send({ data: reg });
     } catch (error) {
       return res.status(200).send({ data: undefined });
@@ -62,9 +60,9 @@ const getAdmin = async (req, res) => {
 const login_admin = async (req, res) => {
   try {
     const data = req.body;
-    let adminArr = await admin.find({ email: 'federendon26@hotmail.com' });
+    let adminArr = await admin.find({ email: data.email });
     const user = adminArr[0];
-    console.log(data.email);
+
     if (adminArr.length > 0) {
       brcrypt.compare(data.password, user.password, async (err, check) => {
         check
@@ -81,7 +79,7 @@ const login_admin = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: 'No se pudo ingresar' });
   }
 };
 
@@ -203,7 +201,6 @@ const ganancias_mensuales_admin = async (req, res) => {
             if (mes == 12) {
               diciembre += item.subtotal;
             }
-            console.log(febrero);
           }
         }
 
